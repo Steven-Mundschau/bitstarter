@@ -177,6 +177,11 @@
 
         <!-- We define a new 'actions' div to contain statistics, order, and share buttons. -->
         <div class="span5 actions">
+          <% var bc_target = 250; var backers=0; var bc_sum=0; %>
+          <% for (var i=0; i<orders.length; i++) {%>
+            <% backers = backers + 1 %>
+            <% bc_sum = bc_sum + orders[i].amount %>
+          <% } %>
           <div class="row-fluid">
           <div class="span8 offset2">
             <div class="row-fluid statistics">
@@ -184,12 +189,12 @@
                 <!-- linediv-l and linediv-r give dividing lines that look different in horizontal
                 and vertical layouts, illustrating media queries. -->
                 <div class="linediv-l">
-                  <h3>1</h3> <p>backers</p>
+                  <h3><%= backers %></h3> <p>backers</p>
                 </div>
               </div>
               <div class="span4">
                 <div class="linediv-c">
-                  <h3>$0.01</h3> <p>of $25,000</p>
+                  <h3><%= bc_sum %></h3> <p>of <%= bc_target %> BTC</p>
                 </div>
               </div>
               <div class="span4">
@@ -206,8 +211,8 @@
           <!-- Bootstrap progress bar -->
           <!-- http://twitter.github.io/bootstrap/components.html#progress -->
           <div class="thermometer progress active">
-            <div class="bar bar-success" style="width: 1%;"> </div>
-            <div class="bar bar-warning" style="width: 99%;"> </div>
+            <div class="bar bar-success" style="width: <%= (bc_sum / bc_target) * 100 %>%;"> </div>
+            <div class="bar bar-warning" style="width: <%= 100 - (bc_sum / bc_target) * 100 %>%;"> </div>
           </div>
         </div>
         </div>
