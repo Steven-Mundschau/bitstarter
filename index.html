@@ -123,6 +123,7 @@
 
     </script>
 
+
   </head>
   <body>
 
@@ -193,7 +194,7 @@
               </div>
               <div class="span4">
                 <div class="linediv-r">
-                  <h3>9</h3> <p>days left</p>
+                  <h3 id="timeRemainingN">-</h3> <p id="timeRemainingU">days left</p>
                 </div>
               </div>
             </div>
@@ -372,6 +373,29 @@
       ga('create', 'UA-43034804-1', 'herokuapp.com');
       ga('send', 'pageview');
 
+    </script>
+
+    <script type="text/javascript">
+      var date_now = new Date();
+      var date_end = new Date("2013-09-09T00:00:00-07:00");
+      var time_remaining = date_end - date_now;
+      var time_remaining_hours = Math.floor(time_remaining / (60 * 60 * 1000));
+      var time_remaining_days = Math.floor(time_remaining / (24 * 60 * 60 * 1000));
+      if (time_remaining_days > 0)
+      {
+        document.getElementById('timeRemainingN').innerText = time_remaining_days;
+        document.getElementById('timeRemainingU').innerText = "days left";
+      }
+      else if (time_remaining_hours > 0 )
+      {
+        document.getElementById('timeRemainingN').innerText = time_remaining_hours;
+        document.getElementById('timeRemainingU').innerText = "hours left";
+      }
+      else 
+      {
+        document.getElementById('timeRemainingN').innerText = "0";
+        document.getElementById('timeRemainingU').innerText = "hours left";
+      }
     </script>
 
   </body>
