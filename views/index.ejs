@@ -177,10 +177,7 @@
 
         <!-- We define a new 'actions' div to contain statistics, order, and share buttons. -->
         <div class="span5 actions">
-          <% var bc_target = 250; var backers=orders.length; var bc_sum=0; %>
-          <% for (var i=0; i<orders.length; i++) {%>
-            <% bc_sum = bc_sum + orders[i].amount %>
-          <% } %>
+          <% var bc_target = 250; %>
           <div class="row-fluid">
           <div class="span8 offset2">
             <div class="row-fluid statistics">

@@ -14,13 +14,9 @@ app.set('port', process.env.PORT || 8080);
 
 // Render homepage (note trailing slash): example.com/
 app.get('/', function(request, response) {
-  global.db.Order.findAll().success(function(orders) {
-    var orders_json = [];
-    orders.forEach(function(order) {
-      orders_json.push({id: order.coinbase_id, amount: order.amount, time: order.time});
-    });
+  global.db.sequelize.query('SELECT count(*), sum(amount) from "Orders"').success(function(q) {
     // Uses views/index.ejs
-    response.render("index", {orders: orders_json});
+    response.render("index", {backers: q[0].count, bc_sum: q[0].sum});
   }).error(function(err) {
     console.log(err);
     response.send("error retrieving index");
